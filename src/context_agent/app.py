@@ -32,7 +32,7 @@ class ContextAgent:
 def create_app(config: Optional[AgentConfig] = None) -> ContextAgent:
     """Create a fully configured :class:`ContextAgent`."""
 
-    agent_config = config or AgentConfig.from_env()
+    agent_config = config or AgentConfig()
     registry = ToolRegistry.from_config(agent_config)
     pipeline = RetrievalPipeline(config=agent_config, registry=registry)
     return ContextAgent(config=agent_config, pipeline=pipeline)
