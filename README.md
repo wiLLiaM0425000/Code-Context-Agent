@@ -41,50 +41,8 @@ answer user questions about symbols, values, or related logic.
    results = list(agent.run(request))
    ```
 
-3. Provide OpenAI credentials either via environment variables or CLI
-   arguments when you want the planner to call the API. Supported variables
-   include:
-   - `OPENAI_API_KEY`
-   - `OPENAI_BASE_URL`
-   - `OPENAI_MODEL`
-   - `OPENAI_ORGANIZATION`
-
-4. Extend the `Planner` and tool implementations to hook in your LLM provider
-   and local analysis services as needed.
-
-## Command Line Runner
-
-The repository ships with a Typer-based CLI that mirrors the agent's core
-contract, making it easy to experiment against local projects:
-
-```bash
-context-agent run \
-  /path/to/workspace \
-  src/module.py \
-  10 40 \
-  --symbol TargetClass \
-  --intent symbol_definition \
-  --query "Locate the definition of TargetClass" \
-  --openai-api-key "$OPENAI_API_KEY"
-```
-
-The CLI resolves relative file paths against the workspace, executes the
-retrieval pipeline, and prints the final request/response payload as JSON for
-easy inspection.
-
-## MCP Tool Integration
-
-To expose the agent as a Model Context Protocol (MCP) tool, install the
-optional `modelcontextprotocol` package and launch the stdio server:
-
-```bash
-pip install -e .[mcp]
-python -m context_agent.integrations.mcp
-```
-
-This registers a `retrieve_code_context` MCP tool that accepts the same
-arguments as the CLI. Host applications can import and use
-`context_agent.integrations.create_mcp_server` to embed the tool directly.
+3. Extend the `Planner` and tool implementations to hook in your LLM provider
+   and local analysis services.
 
 ## Documentation
 

@@ -17,16 +17,6 @@ class RetrievalIntent(str, Enum):
     VALUE_LOOKUP = "value_lookup"
     RELATED_CONTEXT = "related_context"
 
-    @classmethod
-    def parse(cls, value: str) -> "RetrievalIntent":
-        """Parse a string value into a :class:`RetrievalIntent`."""
-
-        try:
-            return cls(value)
-        except ValueError as exc:  # pragma: no cover - validation guard
-            valid = ", ".join(intent.value for intent in cls)
-            raise ValueError(f"Unsupported retrieval intent '{value}'. Options: {valid}") from exc
-
 
 @dataclass(slots=True)
 class RetrievalRequest:
@@ -40,19 +30,6 @@ class RetrievalRequest:
     intent: RetrievalIntent
     natural_language_query: str
 
-    def to_dict(self) -> dict:
-        """Return a serialisable representation of the request."""
-
-        return {
-            "workspace_path": str(self.workspace_path),
-            "file_path": str(self.file_path),
-            "start_line": self.start_line,
-            "end_line": self.end_line,
-            "symbol": self.symbol,
-            "intent": self.intent.value,
-            "natural_language_query": self.natural_language_query,
-        }
-
 
 @dataclass(slots=True)
 class RetrievalResult:
@@ -64,18 +41,6 @@ class RetrievalResult:
     code_snippet: str
     confidence: float
     notes: Optional[str] = None
-
-    def to_dict(self) -> dict:
-        """Convert the result into a JSON serialisable dictionary."""
-
-        return {
-            "file_path": str(self.file_path),
-            "start_line": self.start_line,
-            "end_line": self.end_line,
-            "code_snippet": self.code_snippet,
-            "confidence": self.confidence,
-            "notes": self.notes,
-        }
 
 
 @dataclass(slots=True)

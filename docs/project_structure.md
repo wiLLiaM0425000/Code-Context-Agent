@@ -18,12 +18,8 @@ Code-Context-Agent/
         ├── config.py                # Runtime configuration dataclasses
         ├── models.py                # Core domain models and plan types
         ├── pipeline.py              # Planner + tool execution orchestration
-        ├── planner.py               # LLM planner (OpenAI-aware with fallback)
+        ├── planner.py               # LLM planner stub
         ├── tool_registry.py         # Registry for available tools
-        ├── cli.py                   # Typer CLI for local experimentation
-        ├── integrations/
-        │   ├── __init__.py          # Integration exports
-        │   └── mcp.py               # Model Context Protocol (MCP) adapter
         └── tools/
             ├── __init__.py          # (optional) namespace exports
             ├── base.py              # Shared tool abstractions
